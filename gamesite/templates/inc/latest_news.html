@@ -1,0 +1,15 @@
+{% load latest_news %}
+<!-- Latest news section -->
+<div class="latest-news-section">
+    <div class="ln-title">Latest News</div>
+    <div class="news-ticker">
+        <div class="news-ticker-contant">
+            {% for news in last_news %}
+            <div class="nt-item">
+                <span class="new">{{ news.category }}</span>{{ news.title|truncatewords:5 }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Latest news section end -->

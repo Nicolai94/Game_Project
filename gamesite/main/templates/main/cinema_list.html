@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}News Page{% endblock title %}
+{% block content %}
+
+<!-- Page info section -->
+<section class="page-info-section set-bg" data-setbg="{% static 'img/page-top-bg/1.jpg' %}">
+    <div class="pi-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-6 text-white">
+                    <h2>News Page</h2>
+                    <p>In this page you can see all news</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page info section -->
+
+
+<!-- Page section -->
+<section class="page-section recent-game-page spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row">
+                    {% for n in cinema_news %}
+                    <div class="col-md-6">
+                        <div class="recent-game-item">
+                            <div class="rgi-thumb set-bg" data-setbg="{{ n.image.url }}">
+                            </div>
+                            <div class="rgi-content">
+                                <h5><a href="{% url 'cinema_detail' n.slug %}">{{ n.title }}</a></h5>
+                                <p>{{ n.content|truncatewords:10 }}</p>
+                                <a href="#" class="comment">3 Comments</a>
+                                <div class="rgi-extra">
+                                    <div class="rgi-star"><img src="{% static 'img/icons/star.png' %}" alt=""></div>
+                                    <div class="rgi-heart"><img src="{% static 'img/icons/heart.png' %}" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% include 'inc/pagination.html' %}
+            </div>
+            <!-- sidebar -->
+            <div class="col-lg-4 col-md-7 sidebar pt-5 pt-lg-0">
+                <!-- widget -->
+                <div class="widget-item">
+                    <form class="search-widget">
+                        <input type="text" placeholder="Search">
+                        <button><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <!-- widget -->
+                <div class="widget-item">
+                    <h4 class="widget-title">Latest Posts</h4>
+                    <div class="latest-blog">
+                        <div class="lb-item">
+                            <div class="lb-thumb set-bg" data-setbg="img/latest-blog/1.jpg"></div>
+                            <div class="lb-content">
+                                <div class="lb-date">June 21, 2018</div>
+                                <p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
+                                <a href="#" class="lb-author">By Admin</a>
+                            </div>
+                        </div>
+                        <div class="lb-item">
+                            <div class="lb-thumb set-bg" data-setbg="img/latest-blog/2.jpg"></div>
+                            <div class="lb-content">
+                                <div class="lb-date">June 21, 2018</div>
+                                <p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
+                                <a href="#" class="lb-author">By Admin</a>
+                            </div>
+                        </div>
+                        <div class="lb-item">
+                            <div class="lb-thumb set-bg" data-setbg="img/latest-blog/3.jpg"></div>
+                            <div class="lb-content">
+                                <div class="lb-date">June 21, 2018</div>
+                                <p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
+                                <a href="#" class="lb-author">By Admin</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- widget -->
+                <div class="widget-item">
+                    <h4 class="widget-title">Top Comments</h4>
+                    <div class="top-comment">
+                        <div class="tc-item">
+                            <div class="tc-thumb set-bg" data-setbg="img/authors/1.jpg"></div>
+                            <div class="tc-content">
+                                <p><a href="#">James Smith</a> <span>on</span> Lorem consec ipsum dolor sit amet, co</p>
+                                <div class="tc-date">June 21, 2018</div>
+                            </div>
+                        </div>
+                        <div class="tc-item">
+                            <div class="tc-thumb set-bg" data-setbg="img/authors/2.jpg"></div>
+                            <div class="tc-content">
+                                <p><a href="#">Michael James</a> <span>on</span>Cras sit amet sapien aliquam</p>
+                                <div class="tc-date">June 21, 2018</div>
+                            </div>
+                        </div>
+                        <div class="tc-item">
+                            <div class="tc-thumb set-bg" data-setbg="img/authors/3.jpg"></div>
+                            <div class="tc-content">
+                                <p><a href="#">Justin More</a> <span>on</span> Lorem ipsum dolor consecsit amet, co</p>
+                                <div class="tc-date">June 21, 2018</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page section end -->
+
+
+{% endblock content %}

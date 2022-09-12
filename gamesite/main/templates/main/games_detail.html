@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load embed_video_tags %}
+{% block title %}Games Detail{% endblock title %}
+{% block content %}
+
+<!-- Latest news section -->
+<div class="latest-news-section">
+    <div class="ln-title">Latest News</div>
+    <div class="news-ticker">
+        <div class="news-ticker-contant">
+            <div class="nt-item"><span class="new">new</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
+            <div class="nt-item"><span class="strategy">strategy</span>Isum dolor sit amet, consectetur adipiscing elit. </div>
+            <div class="nt-item"><span class="racing">racing</span>Isum dolor sit amet, consectetur adipiscing elit. </div>
+        </div>
+    </div>
+</div>
+<!-- Latest news section end -->
+
+
+<!-- Page info section -->
+<section class="page-info-section set-bg" data-setbg="{% static 'img/page-top-bg/2.jpg' %}">
+    <div class="pi-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-6 text-white">
+                    <h2>{{ games.title|truncatewords:5 }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page info section -->
+
+
+<!-- Page section -->
+<section class="page-section single-blog-page spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="blog-thumb set-bg" data-setbg="{{ game.image.url }}">
+                    <div class="cata new">{{ game.category }}</div>
+                    <div class="rgi-extra">
+                        <div class="rgi-star"><img src="{% static 'img/icons/star.png' %}" alt=""></div>
+                        <div class="rgi-heart"><img src="{% static 'img/icons/heart.png' %}" alt=""></div>
+                    </div>
+                </div>
+                <div class="blog-content">
+                    <h3>{{ game.title }}</h3>
+                    <a href="" class="meta-comment"><span>Total:{{ game.gamescomment_set.count }}</span> comment</a>
+                    <p>{{ game.content }}</p>
+                    {% if game.video %}
+                    <iframe width="560" height="315" src="{{ game.video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    {% endif %}
+                </div>
+                <div class="comment-warp">
+						<h4 class="comment-title"><span>Total:{{ game.gamescomment_set.count }}  </span>Comments</h4>
+						<ul class="comment-list">
+							{% for comment in games.gamescomment_set.all %}
+							<li>
+								<div class="comment mt-4">
+									<div class="comment-avator set-bg" data-setbg="{% static 'img/authors/1.jpg' %}"></div>
+									<div class="comment-content">
+										<h5>{{ comment.name }} <span>{{ comment.created }}</span></h5>
+										<p>{{ comment.content }}</p>
+										<a href="#formComment" class="reply" onclick="addComment('{{ comment.name }}', '{{ comment.id }}')">Reply</a>
+									</div>
+								</div>
+								<div class="comment mt-5">
+								{% for com in gamescomment.comment_set.all %}
+									<div class="comment-avator set-bg" data-setbg="{% static 'img/authors/1.jpg' %}"></div>
+									<div class="comment-content">
+										<h5>{{ com.name }} <span>{{ com.created }}</span></h5>
+										<p>{{ com.content }}</p>
+										<a href="#formComment" class="reply" onclick="addComment('{{ comment.name }}', '{{ comment.id }}')">Reply</a>
+									</div>
+								{% endfor %}
+								</div>
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+					<div class="comment-form-warp">
+						<h4 class="comment-title">Leave Your Comment</h4>
+						<form action="{% url 'comment_games_news' games.id %}" class="comment-form" method="post" id="formComment">
+							{% csrf_token %}
+							<input type="hidden" name="parent" id="contactparent" value="">
+							<div class="row">
+								<div class="col-md-6">
+									<input class="form-control border" id="contactname" type="text" placeholder="Your name" name="name">
+								</div>
+								<div class="col-md-6">
+									<input class="form-control border" id="contactemail" type="email" placeholder="Email" name="email">
+								</div>
+								<div class="col-lg-12">
+									<textarea class="form-control border" id="contactcomment" rows="5" placeholder="Message" name="content"></textarea>
+									<button class="site-btn btn-sm">Send</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- sidebar -->
+				<div class="col-lg-4 col-md-7 sidebar pt-5 pt-lg-0">
+					<!-- widget -->
+					<div class="widget-item">
+						<form class="search-widget">
+							<input type="text" placeholder="Search">
+							<button><i class="fa fa-search"></i></button>
+						</form>
+					</div>
+					<!-- widget -->
+					<div class="widget-item">
+						<h4 class="widget-title">Latest Posts</h4>
+						<div class="latest-blog">
+							<div class="lb-item">
+								<div class="lb-thumb set-bg" data-setbg="{% static 'img/latest-blog/1.jpg' %}"></div>
+								<div class="lb-content">
+									<div class="lb-date">June 21, 2018</div>
+									<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
+									<a href="#" class="lb-author">By Admin</a>
+								</div>
+							</div>
+							<div class="lb-item">
+								<div class="lb-thumb set-bg" data-setbg="{% static 'img/latest-blog/2.jpg' %}"></div>
+								<div class="lb-content">
+									<div class="lb-date">June 21, 2018</div>
+									<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
+									<a href="#" class="lb-author">By Admin</a>
+								</div>
+							</div>
+							<div class="lb-item">
+								<div class="lb-thumb set-bg" data-setbg="{% static 'img/latest-blog/3.jpg' %}"></div>
+								<div class="lb-content">
+									<div class="lb-date">June 21, 2018</div>
+									<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
+									<a href="#" class="lb-author">By Admin</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- widget -->
+					<div class="widget-item">
+						<h4 class="widget-title">Tags</h4>
+						<div class="top-comment">
+							<div class="tc-item">
+								<div class="tc-thumb set-bg" data-setbg="{% static 'img/authors/1.jpg' %}"></div>
+								<div class="tc-content">
+									<p><a href="#">James Smith</a> <span>on</span> Lorem consec ipsum dolor sit amet, co</p>
+									<div class="tc-date">June 21, 2018</div>
+								</div>
+							</div>
+							<div class="tc-item">
+								<div class="tc-thumb set-bg" data-setbg="{% static 'img/authors/2.jpg' %}"></div>
+								<div class="tc-content">
+									<p><a href="#">Michael James</a> <span>on</span>Cras sit amet sapien aliquam</p>
+									<div class="tc-date">June 21, 2018</div>
+								</div>
+							</div>
+							<div class="tc-item">
+								<div class="tc-thumb set-bg" data-setbg="{% static 'img/authors/3.jpg' %}"></div>
+								<div class="tc-content">
+									<p><a href="#">Justin More</a> <span>on</span> Lorem ipsum dolor consecsit amet, co</p>
+									<div class="tc-date">June 21, 2018</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page section end -->
+<script>
+	function addComment(name, id) {
+            document.getElementById("contactparent").value = id;
+            document.getElementById("contactcomment").innerText = `${name}, `
+        }
+</script>
+{% endblock content %}

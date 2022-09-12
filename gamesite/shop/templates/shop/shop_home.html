@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Shop Home Page{% endblock title %}
+{% block content %}
+
+
+<!--&lt;!&ndash; Feature section &ndash;&gt;-->
+<!--<section class="feature-section spad">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            {% for product in product_list %}-->
+<!--            <div class="col-lg-3 col-md-6 p-0">-->
+<!--                <div class="feature-item set-bg" data-setbg="{{ product.image.url }}">-->
+<!--                    <span class="cata new">{{ product.category }}</span>-->
+<!--                    <div class="fi-content text-white">-->
+<!--                        <h5><a href="#">{{ product.title }}</a></h5>-->
+<!--                        <p>{{ product.content|truncatewords:8 }}</p>-->
+<!--                        <a href="#" class="fi-comment">3 Comments</a><p class="fi-comment">{{ product.created }}</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            {% endfor %}-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--&lt;!&ndash; Feature section end &ndash;&gt;-->
+
+
+<!-- Review section -->
+<section class="review-section spad set-bg" data-setbg="{% static 'img/review-bg.png' %}">
+    <div class="container">
+        <div class="section-title">
+            <div class="cata new">new</div>
+            <h2>Recent Shop Games</h2>
+        </div>
+        <div class="row">
+            {% for product in product_list %}
+            <div class="col-lg-3 col-md-6">
+                <div class="review-item">
+                    <div class="review-cover set-bg" data-setbg="{{ product.image.url }}">
+                        <div class="score yellow">{{ product.category }}</div>
+                    </div>
+                    <div class="review-text">
+                        <h5><a href="{% url 'product_detail' product.slug %}">{{ product.title }}</a></h5>
+                        <p>{{ product.description|truncatewords:7 }}</p><br>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="site-pagination">
+            <nav aria-label="...">
+            <ul class="pagination">
+                {% if product_list.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ product_list.previous_page_number }}">Previous</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                {% endif %}
+                {% for i in product_list.paginator.page_range %}
+                {% if i == product_list.number %}
+                <li class="page-item active"><a class="page-link">{{ i }}</a></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if product_list.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ product_list.next_page_number }}">Next</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        </div>
+    </div>
+</section>
+<!-- Review section end -->
+
+
+{% endblock content %}

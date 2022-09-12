@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<style>
+    .errorlist {
+    color:red;}
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h3>Login Form</h3>
+            <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary">Login</button>
+                {% if error %}
+                <li style="color: red;">{{ error }}</li>
+                {% endif %}
+            </form>
+            <p>Forgot password?<a href="{% url 'passwordforgot' %}">Reset now</a></p>
+            <p>Dont have account?<a href="{% url 'register' %}{%if request.GET.next %}?next={{ request.GET.next }}{% endif %}">Register here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

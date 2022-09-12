@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<style>
+    .errorlist {
+    color:red;}
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h3>Registration Form</h3>
+            <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary">Register</button>
+            {% if error %}
+            <li style="color: red;">{{ error }}</li>
+            {% endif %}
+            </form>
+            <p>or you have account?<a href="{% url 'login' %}{%if request.GET.next %}?next={{ request.GET.next }}{% endif %}">Login here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

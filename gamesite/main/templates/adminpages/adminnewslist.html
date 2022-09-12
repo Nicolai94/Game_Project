@@ -1,0 +1,36 @@
+{% extends 'adminpages/adminbase.html' %}
+{% block title %}All News{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>All Product list</h3><hr>
+      <a href="{% url 'adminnewscreate' %}">Add News</a>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>SN</th>
+            <th>Product Title</th>
+            <th>Image</th>
+            <th>Delete</th>
+            <th>Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in allnews %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ p.title }}</td>
+            <td><img src="{{ p.image.url }}" alt="" style="height: 75px;"></td>
+            <td>{{ p.price }}</td>
+            <td>{{ p.view_count }}</td>
+            <td><a class="btn btn-outline-danger" href="{% url 'delete_news' slug=p.slug %}">Delete It</a></td>
+            <td><a class="btn btn-outline-info" href="{% url 'update_news' slug=p.slug %}">Update It</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock%}

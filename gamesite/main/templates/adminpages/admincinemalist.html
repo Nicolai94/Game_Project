@@ -1,0 +1,36 @@
+{% extends 'adminpages/adminbase.html' %}
+{% block title %}All Cinema News{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>All Cinema list</h3><hr>
+      <a href="{% url 'admincinemacreate' %}">Add News</a>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>SN</th>
+            <th>Product Title</th>
+            <th>Image</th>
+            <th>Delete</th>
+            <th>Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in allcinema %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ p.title }}</td>
+            <td><img src="{{ p.image.url }}" alt="" style="height: 75px;"></td>
+            <td><a class="btn btn-outline-danger" href="{% url 'delete_cinema' slug=p.slug %}">Delete It</a></td>
+            <td><a class="btn btn-outline-info" href="{% url 'update_cinema' slug=p.slug %}">Update It</a></td>
+            <td>{{ p.price }}</td>
+            <td>{{ p.view_count }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock%}
