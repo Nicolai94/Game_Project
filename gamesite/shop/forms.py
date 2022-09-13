@@ -101,7 +101,8 @@ class ProductForm(forms.ModelForm):
                 'class': 'form-control'
             }),
             'image': forms.ClearableFileInput(attrs={
-                'class': 'form-control'
+                'class': 'form-control',
+                'multiple': True
             }),
             'price': forms.NumberInput(attrs={
                 'class': 'form-control',
@@ -123,6 +124,6 @@ class ProductForm(forms.ModelForm):
                 'rows': 5
             }),
             'video': forms.ClearableFileInput(attrs={
-                'class': 'form-control'
+                'class': 'form-control',
             }),
         }

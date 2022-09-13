@@ -15,6 +15,7 @@ class NewsViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
+
 class GamesViewSet(viewsets.ModelViewSet):
     queryset = Games.objects.all().order_by('-id')
     serializer_class = GamesSerializer

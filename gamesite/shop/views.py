@@ -327,7 +327,7 @@ class PasswordResetView(FormView):
         if user is None and password_reset_token.check_token(user, token):
             pass
         else:
-            return redirect(reverse('passwordforgot')+ '?m=e')
+            return redirect(reverse('passwordforgot') + '?m=e')
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
@@ -338,8 +338,7 @@ class PasswordResetView(FormView):
         user.save()
         return super().form_valid(form)
 
-
-    #Admin Pages
+    # Admin Pages
 
 
 class AdminLoginView(FormView):

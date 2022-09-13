@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-=%1+948q=*&at!@a=7a*593nsz33#(5ypg+4rwokwnajtq2m4n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'api.apps.ApiConfig',
     'rest_framework',
+    "corsheaders",
     'ckeditor',
     'ckeditor_uploader',
     'debug_toolbar',
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -209,7 +211,7 @@ CKEDITOR_CONFIGS = {
 }
 
 INTERNAL_IPS = [
-    "127.0.0.1",
+    "127.0.0.1"
 ]
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -217,9 +219,17 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth'
 )
 
+# view of the api in list
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES':[
-        'rest_framework.permissions.IsAdminUser',
-    ],
-    'PAGE_SIZE':10
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'PAGE_SIZE': 10
 }
+
+
+
+CORS_ALLOWED_ORIGINS = [
+    'https://5051-46-53-244-188.eu.ngrok.io',
+]
