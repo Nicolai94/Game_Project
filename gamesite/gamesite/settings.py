@@ -225,11 +225,13 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
-    'PAGE_SIZE': 10
+    # 'PAGE_SIZE': 10
 }
+# разрешает всем доменам подключаться
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_URLS_REGEX = r'/api/.*$'
 
 
-
-CORS_ALLOWED_ORIGINS = [
-    'https://5051-46-53-244-188.eu.ngrok.io',
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'https://5051-46-53-244-188.eu.ngrok.io',
+# ]

@@ -6,10 +6,10 @@ from api.views import NewsViewSet, GamesViewSet, CinemaViewSet, CommentNewsViewS
 CommentGamesViewSet, ProductsViewSet, CommentProductsViewSet, CustomerViewSet, OrderViewSet
 
 router = routers.DefaultRouter()
-router.register(r'news', NewsViewSet, basename='New')
-router.register(r'games', GamesViewSet, basename='Games')
-router.register(r'cinema', CinemaViewSet, basename='Cinema')
-router.register(r'comment', CommentNewsViewSet, basename='Comment_news')
+router.register(r'news', NewsViewSet, basename='news')
+router.register(r'games', GamesViewSet, basename='games')
+router.register(r'cinema', CinemaViewSet, basename='cinema')
+router.register(r'comment', CommentNewsViewSet, basename='comment_news')
 router.register(r'comment-cinema', CommentCinemaViewSet, basename='Comment_cinema')
 router.register(r'comment-games', CommentGamesViewSet, basename='Comment_games')
 router.register(r'products', ProductsViewSet, basename='Products')

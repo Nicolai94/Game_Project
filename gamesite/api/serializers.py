@@ -1,6 +1,6 @@
-from rest_framework import serializers
+from rest_framework import serializers, generics
 
-from main.models import News, Games, CinemaNews, Comment, CinemaComment, GamesComment
+from main.models import News, Games, CinemaNews, Comment, CinemaComment, GamesComment, GamesCategory
 from shop.models import Product, ProductComment, Customer, Order
 
 
@@ -11,13 +11,35 @@ class NewsSerializer(serializers.HyperlinkedModelSerializer):
         model = News
         fields = ['title', 'slug',  'created', 'updated', 'category_name']
 
+    # def create(self, validated_data):
+    #     return News.objects.create(**validated_data)
+
+    # def update(self, instance, validated_data):
+    #     instance.title = validated_data.get('title', instance.title)
+    #     instance.slug = validated_data.get('slug', instance.slug)
+    #     instance.updated = validated_data.get('updated', instance.updated)
+    #     instance.category_name = validated_data.get('category_name', instance.category_name)
+    #     instance.save()
+    #     return instance
+
 
 class GamesSerializer(serializers.HyperlinkedModelSerializer):
-    category_name = serializers.CharField(source='category.name')
+    category_name = serializers.CharField(source='category.name', read_only=True)
 
     class Meta:
         model = Games
         fields = ['title', 'slug', 'content', 'created', 'available', 'category_name']
+
+    def create(self, validated_data):
+        category = []
+        if 'category' in validated_data:
+            category = validated_data.pop('category')
+        games = Games.objects.create(**validated_data)
+        print(games)
+
+        for cat in category:
+            GamesCategory.objects.create(games=games, **cat)
+        return games
 
 
 class CinemaSerializer(serializers.HyperlinkedModelSerializer):
