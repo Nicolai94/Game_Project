@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'api.apps.ApiConfig',
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
     "corsheaders",
     'ckeditor',
     'ckeditor_uploader',
@@ -40,7 +42,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -221,17 +223,24 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 # view of the api in list
 REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination', #pagination for api
+    'PAGE_SIZE': 20,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
-    # 'PAGE_SIZE': 10
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+
+    ),
 }
 # разрешает всем доменам подключаться
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'/api/.*$'
 
-
-# CORS_ALLOWED_ORIGINS = [
-#     'https://5051-46-53-244-188.eu.ngrok.io',
-# ]
+CSRF_TRUSTED_ORIGINS=['https://c261-46-53-244-188.eu.ngrok.io']

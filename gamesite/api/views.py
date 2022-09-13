@@ -6,9 +6,12 @@ from api.serializers import NewsSerializer, GamesSerializer, CinemaSerializer, C
  CommentCinemaSerializer, CommentGamesSerializer, ProductsSerializer, CommentProductsSerializer, CustomerSerializer, \
 OrderSerializer
 from main.models import News, Games, CinemaNews, Comment, CinemaComment, GamesComment, GamesCategory
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from shop.models import Product, ProductComment, Customer, Order
+from .permissions import IsAdminOrReadOnly
 
 
 class NewsViewSet(viewsets.ModelViewSet):
@@ -46,10 +49,18 @@ class NewsViewSet(viewsets.ModelViewSet):
     #     return Response({'post': serializer.data})
 
 
+class GamesAPIListPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 2
+
 
 class GamesViewSet(viewsets.ModelViewSet):
     queryset = Games.objects.all().order_by('-id')
     serializer_class = GamesSerializer
+    permission_classes = [IsAdminOrReadOnly] #custom class
+    authentication_classes = [TokenAuthentication]
+    pagination_class = GamesAPIListPagination
 
     # def get_queryset(self):
     #     pk = self.kwargs.get('pk')
@@ -61,7 +72,7 @@ class GamesViewSet(viewsets.ModelViewSet):
     def category(self, request, pk=None):
         cats = GamesCategory.objects.get(pk=pk)
         return Response({'cats': cats.name})
-    #permission_classes = [permissions.IsAuthenticated]
+
 
 
 class CinemaViewSet(viewsets.ModelViewSet):
