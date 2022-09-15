@@ -24,6 +24,7 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
     path('', include('main.urls')),
     path('shop/', include('shop.urls')),
+    path('forum/', include('forum.urls')),
     path('api/', include(router.urls)),
     path('api-auth/drf/', include('rest_framework.urls')),# systeme authentication here
     path(r'api-auth/', include('djoser.urls')),

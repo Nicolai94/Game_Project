@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'shop.apps.ShopConfig',
     'api.apps.ApiConfig',
+    'forum.apps.ForumConfig',
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
@@ -240,7 +241,7 @@ REST_FRAMEWORK = {
     ),
 }
 # разрешает всем доменам подключаться
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_URLS_REGEX = r'/api/.*$'
 
 CSRF_TRUSTED_ORIGINS=['https://c261-46-53-244-188.eu.ngrok.io']
