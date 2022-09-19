@@ -1,9 +1,0 @@
-djoser == 2.1
-django == 4.1
-django-rest-framework == 3.13.1
-ckeditor == 6.5
-django-debug-tool == 3.6
-django-cors-headers == 3.6
-EmbedVideo
-pillow == 9.2
-psycopg2 == 2.9.3

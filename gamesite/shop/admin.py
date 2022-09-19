@@ -42,9 +42,15 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(ProductComment)
 class ProductCommentAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'created']
+    list_filter = ['name']
+    save_as = True
 
 
-admin.site.register(Order)
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['cart', 'ordered_by', 'order_status', 'total']
+    list_editable = ['order_status']
+
 admin.site.register(Customer)
 admin.site.register(Cart)
 admin.site.register(CartProduct)
