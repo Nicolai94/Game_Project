@@ -28,4 +28,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api-auth/drf/', include('rest_framework.urls')),# systeme authentication here
     path(r'api-auth/', include('djoser.urls')),
-    path(r'^auth/', include('djoser.urls.authtoken')),]
+    path(r'^auth/', include('djoser.urls.authtoken')),
+    path('chat/', include('chat.urls')),
+]

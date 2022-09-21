@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'shop.apps.ShopConfig',
     'api.apps.ApiConfig',
+    'chat.apps.ChatConfig',
     'forum.apps.ForumConfig',
     'rest_framework',
     'rest_framework.authtoken',
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'debug_toolbar',
     'embed_video',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -75,6 +77,23 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'gamesite.wsgi.application'
+ASGI_APPLICATION = "gamesite.asgi.application"
+
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": 'channels_redis.core.RedisChannelLayer',
+        "CONFIG": {
+            "hosts": [('127.0.0.1', 6379)]
+        }
+}
+}
+
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels.layers.InMemoryChannelLayer'
+#     }
+# }
 
 
 # Database
