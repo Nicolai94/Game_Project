@@ -11,6 +11,7 @@ class RoomAdmin(admin.ModelAdmin):
     save_on_top = True
     search_fields = ['name']
 
+
 @admin.register(Messages)
 class MessagesAdmin(admin.ModelAdmin):
     list_display = ['room', 'user', 'date_added']

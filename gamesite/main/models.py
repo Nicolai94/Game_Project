@@ -182,4 +182,3 @@ class GamesComment(models.Model):
 
     class Meta:
         ordering = ('created',)
-

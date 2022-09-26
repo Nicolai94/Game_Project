@@ -17,7 +17,7 @@ class Messages(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return 'Comment by {} on {}'.format(self.user, self.room)
+        return 'Message by {} on {}'.format(self.user, self.room)
 
     class Meta:
         ordering = ['date_added']
