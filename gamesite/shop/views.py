@@ -316,7 +316,7 @@ class PasswordForgotView(FormView):
 
 
 class PasswordResetView(FormView):
-    template_name = 'passwordreset.html'
+    template_name = 'password_reset.html'
     form_class = PasswordResetForm
     success_url = '/login/'
 

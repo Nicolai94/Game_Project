@@ -26,6 +26,7 @@ urlpatterns = [
     path('shop/', include('shop.urls')),
     path('forum/', include('forum.urls')),
     path('api/', include(router.urls)),
+    # path('api/', include('api.urls')),
     path('api-auth/drf/', include('rest_framework.urls')),# systeme authentication here
     path(r'api-auth/', include('djoser.urls')),
     path(r'^auth/', include('djoser.urls.authtoken')),

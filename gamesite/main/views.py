@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import *
 from django.contrib.postgres.search import SearchVector
-from main.models import News, CinemaNews, Games, NewsImage, GamesImage, CinemaImage
+from main.models import News, CinemaNews, Games, NewsImage, GamesImage, CinemaImage, Comment, GamesComment
 from shop.models import Product, Admin
 from main.forms import CommentForm, CinemaCommentForm, GamesCommentForm, NewsForm, GamesForm, CinemaForm
 
@@ -31,8 +31,10 @@ class NewsDetailView(DetailView):
         context = super().get_context_data()
         url_slug = self.kwargs['slug']
         news = News.objects.get(slug=url_slug)
+        comments = Comment.objects.all()[:3]
         news.save()
         context['news'] = news
+        context['comments'] = comments
         return context
 
 
@@ -97,6 +99,8 @@ class NewsView(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        comments = Comment.objects.all()[:3]
+        context['comments'] = comments
         context['title'] = 'News page'
         return context
 
@@ -127,8 +131,10 @@ class CinemaDetailView(DetailView):
         context = super().get_context_data()
         url_slug = self.kwargs['slug']
         cinema = CinemaNews.objects.get(slug=url_slug)
+        comments = Comment.objects.all()[:3]
         cinema.save()
         context['cinema'] = cinema
+        context['comments'] = comments
         return context
 
 
@@ -157,8 +163,10 @@ class GamesDetailView(DetailView):
         context = super().get_context_data()
         url_slug = self.kwargs['slug']
         game = Games.objects.get(slug=url_slug)
+        comments = GamesComment.objects.all()[:3]
         game.save()
         context['game'] = game
+        context['comments'] = comments
         return context
 
 

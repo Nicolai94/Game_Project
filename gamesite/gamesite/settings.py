@@ -4,7 +4,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -15,7 +14,6 @@ SECRET_KEY = 'django-insecure-=%1+948q=*&at!@a=7a*593nsz33#(5ypg+4rwokwnajtq2m4n
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -79,21 +77,20 @@ TEMPLATES = [
 WSGI_APPLICATION = 'gamesite.wsgi.application'
 ASGI_APPLICATION = "gamesite.asgi.application"
 
-
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": 'channels_redis.core.RedisChannelLayer',
-        "CONFIG": {
-            "hosts": [('127.0.0.1', 6379)]
-        }
-}
-}
-
 # CHANNEL_LAYERS = {
-#     'default': {
-#         'BACKEND': 'channels.layers.InMemoryChannelLayer'
+#     "default": {
+#         "BACKEND": 'channels_redis.core.RedisChannelLayer',
+#         "CONFIG": {
+#             "hosts": [('127.0.0.1', 6379)]
+#         }
 #     }
 # }
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 
 # Database
@@ -109,7 +106,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -129,7 +125,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -140,7 +135,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -156,7 +150,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIl_HOST = 'smtp.gmail.com'
@@ -243,7 +236,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 # view of the api in list
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination', #pagination for api
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',  # pagination for api
     'PAGE_SIZE': 20,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
@@ -263,4 +256,4 @@ REST_FRAMEWORK = {
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_URLS_REGEX = r'/api/.*$'
 
-CSRF_TRUSTED_ORIGINS=['https://c261-46-53-244-188.eu.ngrok.io']
+CSRF_TRUSTED_ORIGINS = []

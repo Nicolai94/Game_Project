@@ -44,7 +44,7 @@
                     <div class="fi-content text-white">
                         <h5><a href="{% url 'news_detail' news.slug %}">{{ news.title }}</a></h5>
                         <p>{{ news.content|truncatewords:8 }}</p>
-                        <a href="#" class="fi-comment">3 Comments</a><p class="fi-comment">{{ news.created }}</p>
+                        <p class="fi-comment">{{ news.created }}</p>
                     </div>
                 </div>
             </div>
@@ -64,15 +64,14 @@
         </div>
         <div class="row">
             {% for game in all_games %}
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <div class="recent-game-item">
-                    <div class="rgi-thumb set-bg" data-setbg="{{ game.image.url }}">
+                    <div style="width: 200px" class="rgi-thumb set-bg" data-setbg="{{ game.image.url }}">
                         <div class="cata new">{{ game.category }}</div>
                     </div>
                     <div class="rgi-content">
                         <h5><a href="{% url 'games_detail' game.slug %}">{{ game.title }}</a></h5>
                         <p>{{ game.content|truncatewords:8 }}</p>
-                        <a href="#" class="comment">3 Comments</a>`
                         <div class="rgi-extra">
                             <div class="rgi-star"><img src="{% static 'img/icons/star.png' %}" alt=""></div>
                             <div class="rgi-heart"><img src="{% static 'img/icons/heart.png' %}" alt=""></div>
