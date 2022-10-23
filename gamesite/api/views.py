@@ -52,7 +52,7 @@ class GamesViewSet(viewsets.ModelViewSet):
     @action(methods=['get'], detail=True)
     def category(self, request, pk=None):
         cats = GamesCategory.objects.get(pk=pk)
-        return Response({'cats': cats.name})
+        return Response({'cats': cats.name}, status=status.HTTP_202_ACCEPTED)
 
 
 
